@@ -1,7 +1,10 @@
-﻿using Cpm.Api.Domain.Model;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Cpm.Api.Api.RequestDto
+namespace Cpm.Api.Contracts.RequestDtos
 {
     public class DoctorDto
     {

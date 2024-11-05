@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Cpm.Api.Application.Interface;
 using Cpm.Api.Application.Provider;
+using Cpm.Api.Contracts.RequestDtos;
 using Cpm.Api.Domain.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +11,8 @@ namespace Cpm.Api.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(Roles ="Admin")]
     public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
@@ -29,7 +33,7 @@ namespace Cpm.Api.Api.Controllers
             return Ok(result);
         }
         [HttpPost("AddDoctor")]
-        public async Task<ActionResult<DoctorMasterModel>> AddDoctor(DoctorMasterModel model)
+        public async Task<ActionResult<DoctorMasterModel>> AddDoctor(DoctorDto model)
         {
             var result = _mapper.Map<DoctorMasterModel>(model);
             await _doctorService.AddDoctor(result);
@@ -46,7 +50,7 @@ namespace Cpm.Api.Api.Controllers
             return Ok(result);
         }
         [HttpPut("UpdateDoctor/{id}")]
-        public async Task<ActionResult> UpdateDoctor(int id, DoctorMasterModel model)
+        public async Task<ActionResult> UpdateDoctor(int id, DoctorDto model)
         {
             var result = _mapper.Map<DoctorMasterModel>(model);
             result.DoctorId = id;

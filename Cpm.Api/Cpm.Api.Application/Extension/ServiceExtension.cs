@@ -11,6 +11,9 @@ namespace Cpm.Api.Application.Extension
         {
             service.AddScoped<IClinicService, ClinicService>();
             service.AddScoped<IDoctorService, DoctorService>();
+            service.AddScoped<ILoginServices, LoginService>();
+            service.AddScoped<IPasswordHasher, PasswordHasherService>();
+            service.AddScoped<ISkillService, SkillService>();
             return service;
         }
     }

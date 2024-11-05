@@ -1,4 +1,10 @@
-﻿namespace Cpm.Api.Api.RequestDto
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cpm.Api.Contracts.RequestDtos
 {
     public class ClinicDto
     {
