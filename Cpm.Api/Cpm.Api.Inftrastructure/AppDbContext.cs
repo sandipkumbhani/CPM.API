@@ -19,6 +19,8 @@ namespace Cpm.Api.Inftrastructure
         public DbSet<SkillMasterModel> Skill_master { get; set; }
         public DbSet<RoleMasterModel> Role_master { get; set; }
         public DbSet<LoginModel> Login_Model { get; set; }
+        public DbSet<PatientViewModel> Patient { get; set; }
+        public DbSet<PatientDiagnosisViewModel> Patient_Diagnosis { get; set; }
 
     }
 }

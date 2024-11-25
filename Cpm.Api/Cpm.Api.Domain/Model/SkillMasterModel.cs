@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cpm.Api.Domain.Model
 {
@@ -12,5 +13,8 @@ namespace Cpm.Api.Domain.Model
         public DateTime? InsDateTime { get; set; }
         public int? UpdBy { get; set; }
         public DateTime? UpdDateTime { get; set; }
+
+       //public ICollection<DoctorMasterModel> DoctorMasterModel { get; } = new List<DoctorMasterModel>(); // Collection navigation containing dependents
+
     }
 }

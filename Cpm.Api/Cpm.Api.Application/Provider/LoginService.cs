@@ -18,9 +18,17 @@ namespace Cpm.Api.Application.Provider
             _loginRepository = loginRepository;
             _passwordHasher = passwordHasher;
         }
+
+        public async Task<LoginModel> AddUser(LoginModel model)
+        {
+            var passwordHasher = _passwordHasher.HashPassword(model.Password);
+            model.Password = passwordHasher;
+            return await _loginRepository.AddUserAsync(model);
+        }
+
         public async Task<LoginModel?> GetAuthentication(string email, string password)
         {
-            //var passwordHasher = _passwordHasher.HashPassword(password);
+            var passwordHasher = _passwordHasher.HashPassword(password);
             var user = await _loginRepository.GetByEmailAsync(email);
             if (user == null || !_passwordHasher.VerifyPassword(user.Password, password))
             {
@@ -37,6 +45,13 @@ namespace Cpm.Api.Application.Provider
         public RoleMasterModel GetRoleByID(int id)
         {
             return _loginRepository.GetRoleById(id);
+        }
+
+        public async Task UpdateUser(LoginModel model)
+        {
+            var passwordHasher = _passwordHasher.HashPassword(model.Password);
+            model.Password = passwordHasher;
+            await _loginRepository.UpdateUser(model);
         }
     }
 }

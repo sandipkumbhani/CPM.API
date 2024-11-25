@@ -12,7 +12,9 @@ namespace Cpm.Api.Contracts.RequestDtos
         public string? DoctorNo { get; set; }
         public DateOnly? DOB { get; set; }
         public string? DoctorEmail { get; set; }
-        public int? SkillId { get; set; } = null;
+        public int? SkillId { get; set; } = 0;
+        public int? ClinicId { get; set; }
+        public int? RoleId { get; set; } = 1;
         public bool IsActive { get; set; } = true;
         public int? InsBy { get; set; }
         public DateTime? InsDateTime { get; set; }

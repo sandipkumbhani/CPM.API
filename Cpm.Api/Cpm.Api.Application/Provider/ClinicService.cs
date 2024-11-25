@@ -1,6 +1,7 @@
 ﻿using Cpm.Api.Application.Interface;
 using Cpm.Api.Domain.Interface;
 using Cpm.Api.Domain.Model;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Cpm.Api.Application.Provider
         }
         public async Task<ClinicMasterModel> AddClinic(ClinicMasterModel model)
         {
-           return await _repository.AddClinic(model);
+                return await _repository.AddClinic(model);
         }
 
         public async Task<int> DeleteClinic(int id)

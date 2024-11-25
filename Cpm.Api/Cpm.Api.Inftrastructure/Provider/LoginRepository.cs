@@ -16,6 +16,14 @@ namespace Cpm.Api.Inftrastructure.Provider
         {
             _dbContext = appDbContext;
         }
+
+        public async Task<LoginModel> AddUserAsync(LoginModel model)
+        {
+            await _dbContext.Login_Model.AddAsync(model);
+            await _dbContext.SaveChangesAsync();
+            return model;
+        }
+
         public async Task<LoginModel?> GetAuthentication(string email, string password)
         {
             return await _dbContext.Login_Model.Where(x=>x.EmailId == email && x.Password == password).FirstOrDefaultAsync();
@@ -29,6 +37,12 @@ namespace Cpm.Api.Inftrastructure.Provider
         public RoleMasterModel GetRoleById(int id)
         {
            return _dbContext.Role_master.Where(x=>x.RoleId==id).FirstOrDefault();
+        }
+
+        public async Task UpdateUser(LoginModel model)
+        {
+            _dbContext.Login_Model.Update(model);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

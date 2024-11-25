@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{357E7710-E2A3-43EA-8806-2BA07F65CFE2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inftrastructure", "Inftrastructure", "{97DC2D78-9E0F-47E1-A714-FFAB019A421B}"
+	ProjectSection(SolutionItems) = preProject
+		Cpm.Api.Domain\Model\SkillMasterModel.cs = Cpm.Api.Domain\Model\SkillMasterModel.cs
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cpm.Api.Api", "Cpm.Api.Api\Cpm.Api.Api.csproj", "{E1A43069-BE8F-4196-8136-96BDE83B6122}"
 EndProject
@@ -19,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cpm.Api.Domain", "Cpm.Api.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cpm.Api.Inftrastructure", "Cpm.Api.Inftrastructure\Cpm.Api.Inftrastructure.csproj", "{D73F9B55-C631-4E9C-A48E-BDB1ACB917F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cpm.Api.Contracts", "Cpm.Api.Contracts\Cpm.Api.Contracts.csproj", "{C9F7036D-E05D-44C6-ABD8-1BCBB8F7B294}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cpm.Api.Contracts", "Cpm.Api.Contracts\Cpm.Api.Contracts.csproj", "{C9F7036D-E05D-44C6-ABD8-1BCBB8F7B294}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

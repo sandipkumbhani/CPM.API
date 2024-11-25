@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Cpm.Api.Application.Interface;
+using Cpm.Api.Application.Provider;
 using Cpm.Api.Contracts.RequestDtos;
 using Cpm.Api.Domain.Interface;
 using Cpm.Api.Domain.Model;
@@ -30,7 +31,37 @@ namespace Cpm.Api.Api.Controllers
             _configuration = configuration;
             _passwordHasher = passwordHasher;
         }
-
+        [HttpPost("AddUser")]
+        public async Task<ActionResult<LoginModel>> AddUsers(LoginDto loginDto)
+        {
+            var user = await _loginServices.GetByEmailAsync(loginDto.EmailId);
+            if (user == null)
+            {
+                var result = _mapper.Map<LoginModel>(loginDto);
+                await _loginServices.AddUser(result);
+                return Ok(result);
+            }
+            return Ok();
+        }
+        [HttpPut("UpdateUser/{id}")]
+        public async Task<ActionResult> UpdateUser(int id, LoginDto loginDto)
+        {
+            var result = _mapper.Map<LoginModel>(loginDto);
+            result.LoginId = id;
+            await _loginServices.UpdateUser(result);
+            return Ok(result);
+        }
+        [HttpGet("GetByEmail/{email}")]
+        public async Task<IActionResult> GetByEmail(string email)
+        {
+            
+            var result = await _loginServices.GetByEmailAsync(email);
+            if (result == null || result.LoginId == 0)
+            {
+                return NotFound("User not Found");
+            }
+            return Ok(result);
+        }
         [HttpPost]
         public IActionResult LogIn([FromBody] LoginDto loginDto)
         {
@@ -50,10 +81,12 @@ namespace Cpm.Api.Api.Controllers
             var role = _loginServices.GetRoleByID(Convert.ToInt32(model.RoleId));
             var claims = new[]
             {                
+                new Claim("loginid",model.LoginId.ToString()),
                 new Claim("email",model.EmailId),
-                new Claim("userid",model.UserId.ToString()),
                 new Claim("roleid",model.RoleId.ToString()),
-                new Claim(ClaimTypes.Role, role.RoleName)
+                new Claim("doctorid",model.DoctorId.ToString()),
+                new Claim("password",model.Password),
+                new Claim("rolename", role.RoleName)
             };
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
                 _configuration["Jwt:Issuer"],

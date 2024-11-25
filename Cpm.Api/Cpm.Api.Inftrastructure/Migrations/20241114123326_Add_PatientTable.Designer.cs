@@ -4,6 +4,7 @@ using Cpm.Api.Inftrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cpm.Api.Inftrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241114123326_Add_PatientTable")]
+    partial class Add_PatientTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +68,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasKey("ClinicId");
 
-                    b.ToTable("Clinic_master", (string)null);
+                    b.ToTable("Clinic_master");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.DoctorMasterModel", b =>
@@ -120,7 +123,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("Doctor_master", (string)null);
+                    b.ToTable("Doctor_master");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.LoginModel", b =>
@@ -149,43 +152,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Login_Model", (string)null);
-                });
-
-            modelBuilder.Entity("Cpm.Api.Domain.Model.PatientDiagnosisViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FoodSuggestions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsQueue")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Report")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("VisitedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("prescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("Patient_Diagnosis", (string)null);
+                    b.ToTable("Login_Model");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.PatientViewModel", b =>
@@ -233,7 +200,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasIndex("ClinicId");
 
-                    b.ToTable("Patient", (string)null);
+                    b.ToTable("Patient");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.RoleMasterModel", b =>
@@ -249,7 +216,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Role_master", (string)null);
+                    b.ToTable("Role_master");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.SkillMasterModel", b =>
@@ -280,7 +247,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasKey("SkillId");
 
-                    b.ToTable("Skill_master", (string)null);
+                    b.ToTable("Skill_master");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.DoctorMasterModel", b =>
@@ -317,15 +284,6 @@ namespace Cpm.Api.Inftrastructure.Migrations
                     b.Navigation("DoctorMaster");
 
                     b.Navigation("RoleMaster");
-                });
-
-            modelBuilder.Entity("Cpm.Api.Domain.Model.PatientDiagnosisViewModel", b =>
-                {
-                    b.HasOne("Cpm.Api.Domain.Model.PatientViewModel", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId");
-
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.PatientViewModel", b =>

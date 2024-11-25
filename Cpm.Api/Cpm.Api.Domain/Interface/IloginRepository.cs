@@ -9,6 +9,8 @@ namespace Cpm.Api.Domain.Interface
 {
     public interface IloginRepository
     {
+        Task<LoginModel> AddUserAsync(LoginModel model);
+        Task UpdateUser(LoginModel model);
         Task<LoginModel?> GetAuthentication(string email, string password);
         Task<LoginModel?> GetByEmailAsync(string email);
         RoleMasterModel GetRoleById(int id);

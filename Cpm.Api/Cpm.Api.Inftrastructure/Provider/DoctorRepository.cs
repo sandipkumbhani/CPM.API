@@ -20,9 +20,8 @@ namespace Cpm.Api.Inftrastructure.Provider
         {
            await _dbContext.Doctor_master.AddAsync(model);
            await _dbContext.SaveChangesAsync();
-            return model;
+           return model;
         }
-
         public async Task DeleteDoctor(DoctorMasterModel model)
         {
             _dbContext.Doctor_master.Update(model);
@@ -31,12 +30,12 @@ namespace Cpm.Api.Inftrastructure.Provider
 
         public async Task<IEnumerable<DoctorMasterModel>> GetAll()
         {
-           return await _dbContext.Doctor_master.Where(x=>x.IsActive == true).ToListAsync();
+           return await _dbContext.Doctor_master.Where(x=>x.IsActive == true).Include(x=>x.ClinicMaster).Include(x=>x.SkillMaster).Include(x=>x.RoleMaster).ToListAsync();
         }
 
         public async Task<DoctorMasterModel> GetByID(int id)
         {
-            return await _dbContext.Doctor_master.Where(x=>x.DoctorId == id).FirstOrDefaultAsync();
+            return await _dbContext.Doctor_master.Where(x=>x.DoctorId == id).Include(x=>x.ClinicMaster).FirstOrDefaultAsync();
         }
 
         public async Task UpdateDoctor(DoctorMasterModel model)

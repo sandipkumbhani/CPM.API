@@ -7,7 +7,10 @@ namespace Cpm.Api.Domain.Model
     {
         [Key]
         public int LoginId { get; set; }
-        public int? UserId { get; set; }
+        public int? DoctorId { get; set; }
+        [ForeignKey("DoctorId")]
+        public DoctorMasterModel? DoctorMaster { get; set; }
+
         public string? EmailId { get; set; }
         public string? Password { get; set; }
         public int? RoleId { get; set; }

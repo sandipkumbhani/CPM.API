@@ -22,7 +22,7 @@ namespace Cpm.Api.Application.Provider
 
         public bool VerifyPassword(string hashPassword, string providePassword)
         {
-            //var providePasswordHasher = HashPassword(providePassword);
+            var providePasswordHasher = HashPassword(providePassword);
             var result = _passwordHasher.VerifyHashedPassword(null, hashPassword, providePassword);
             return result == PasswordVerificationResult.Success;
         }

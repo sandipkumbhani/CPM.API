@@ -17,6 +17,8 @@ namespace Cpm.Api.Inftrastructure.Extension
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IloginRepository, LoginRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IPatientDiagnosisRepository, PatientDiagnosisRepository>();
             return services;
         }
     }

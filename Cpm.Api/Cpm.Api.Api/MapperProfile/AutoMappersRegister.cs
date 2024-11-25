@@ -16,7 +16,11 @@ namespace Cpm.Api.Api.MapperProfile
             CreateMap<LoginModel, LoginDto>();
             CreateMap<LoginDto, LoginModel>();
             CreateMap<SkillMasterModel, SkillDto>();
-            CreateMap<SkillDto, SkillMasterModel>();
+            CreateMap<SkillDto, SkillMasterModel>(); 
+            CreateMap<PatientViewModel, PatientDto>();
+            CreateMap<PatientDto, PatientViewModel>(); 
+            CreateMap<PatientDiagnosisViewModel, PatientDiagnosisDto>();
+            CreateMap<PatientDiagnosisDto, PatientDiagnosisViewModel>();
         }
     }
 }

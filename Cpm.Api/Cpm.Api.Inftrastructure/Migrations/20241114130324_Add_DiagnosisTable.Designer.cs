@@ -4,6 +4,7 @@ using Cpm.Api.Inftrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cpm.Api.Inftrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241114130324_Add_DiagnosisTable")]
+    partial class Add_DiagnosisTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +68,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasKey("ClinicId");
 
-                    b.ToTable("Clinic_master", (string)null);
+                    b.ToTable("Clinic_master");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.DoctorMasterModel", b =>
@@ -120,7 +123,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("Doctor_master", (string)null);
+                    b.ToTable("Doctor_master");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.LoginModel", b =>
@@ -149,7 +152,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Login_Model", (string)null);
+                    b.ToTable("Login_Model");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.PatientDiagnosisViewModel", b =>
@@ -185,7 +188,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Patient_Diagnosis", (string)null);
+                    b.ToTable("Patient_Diagnosis");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.PatientViewModel", b =>
@@ -233,7 +236,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasIndex("ClinicId");
 
-                    b.ToTable("Patient", (string)null);
+                    b.ToTable("Patient");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.RoleMasterModel", b =>
@@ -249,7 +252,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Role_master", (string)null);
+                    b.ToTable("Role_master");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.SkillMasterModel", b =>
@@ -280,7 +283,7 @@ namespace Cpm.Api.Inftrastructure.Migrations
 
                     b.HasKey("SkillId");
 
-                    b.ToTable("Skill_master", (string)null);
+                    b.ToTable("Skill_master");
                 });
 
             modelBuilder.Entity("Cpm.Api.Domain.Model.DoctorMasterModel", b =>

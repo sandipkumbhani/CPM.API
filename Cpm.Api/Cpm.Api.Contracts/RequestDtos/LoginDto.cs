@@ -8,7 +8,7 @@ namespace Cpm.Api.Contracts.RequestDtos
 {
     public class LoginDto
     {
-        public int UserId { get; set; }
+        public int DoctorId { get; set; }
         public string? EmailId { get; set; }
         public string? Password { get; set; }
         public int RoleId { get; set; }

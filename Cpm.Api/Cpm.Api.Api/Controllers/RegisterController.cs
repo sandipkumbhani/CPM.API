@@ -1,6 +1,9 @@
-﻿using Cpm.Api.Application.Interface;
+﻿using AutoMapper;
+using Cpm.Api.Application.Interface;
 using Cpm.Api.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace Cpm.Api.Api.Controllers
 {
@@ -8,35 +11,47 @@ namespace Cpm.Api.Api.Controllers
     [ApiController]
     public class RegisterController : ControllerBase
     {
-
+        private readonly IMapper _mapper;
         private readonly IClinicService _clinicService;
         private readonly IDoctorService _doctorService;
-        public RegisterController(IClinicService clinicService, IDoctorService doctorService)
+        public RegisterController(IClinicService clinicService, IDoctorService doctorService, IMapper mapper)
         {
             _doctorService = doctorService;
             _clinicService = clinicService;
+            _mapper = mapper;
         }
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult<RegisterViewModel>> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var clinic = new ClinicMasterModel
+                int cid;
+                var clinics = await _clinicService.GetAllClinic();
+                var existClinic = clinics.FirstOrDefault(x => x.Name == model.ClinicName);
+                if (existClinic == null)
                 {
-                    Name = model.ClinicName,
-                    Address = model.Address,
-                    EmailId = model.Email,
-                    Phone = model.PhoneNumber
-                };
-                await _clinicService.AddClinic(clinic);
-
+                    var clinic = new ClinicMasterModel
+                    {
+                        Name = model.ClinicName,
+                        Address = model.Address,
+                        EmailId = model.Email,
+                        Phone = model.PhoneNumber
+                    };
+                    var clinicdetails =  await _clinicService.AddClinic(clinic);
+                    cid = clinicdetails.ClinicId;
+                }
+                else
+                {
+                    cid = existClinic.ClinicId;
+                }
                 var doctor = new DoctorMasterModel
                 {
                     Name = model.DoctorName,
                     DoctorNo = model.PhoneNumber,
                     DoctorEmail = model.Email,
                     SkillId = model.SkillId,
-                    InsDateTime = DateTime.Now
+                    ClinicId = cid,
+                    InsDateTime = DateTime.Now,
                 };
                 await _doctorService.AddDoctor(doctor);
 
